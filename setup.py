@@ -21,6 +21,7 @@ setup(
         'rope',
         'flask',
         'pymongo',
-        'python-dotenv'
+        'python-dotenv',
+        'underthesea'
     ],
 )

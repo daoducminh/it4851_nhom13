@@ -5,10 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body>
-
+    <div class="container-fluid">
+        <h1>Search image</h1>
+        <form action="/search-image" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" id="image-input">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <script src="../static/js/index.js"></script>
 </body>
 
 </html>
