@@ -1,7 +1,13 @@
 import os
-from flask import Flask, send_from_directory, render_template, request, redirect, url_for, flash, jsonify
-from werkzeug.utils import secure_filename
+
 from dotenv import load_dotenv
+from flask import Flask, flash, jsonify, redirect, render_template, request, send_from_directory, url_for
+from werkzeug.utils import secure_filename
+
+from tensorflow.keras.models import load_model
+
+from utils.model_prediction import convert_image, predict
+
 load_dotenv(dotenv_path='.env')
 
 SECRET_KEY = os.getenv('SECRET_KEY')
@@ -13,6 +19,8 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = SECRET_KEY
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+
+NORMAL_MODEL = load_model('saved_models/trained_cnn1')
 
 
 def allowed_file(filename):
@@ -36,8 +44,12 @@ def search_image():
     if file and allowed_file(file.filename):
         print(file.filename)
         filename = secure_filename(file.filename)
-        file.save(os.path.join(UPLOAD_FOLDER, filename))
-        return jsonify({'msg': f'Received {filename}'}), 200
+        filepath = os.path.join(UPLOAD_FOLDER, filename)
+        file.save(filepath)
+        jpeg_image_path = convert_image(filepath)
+
+        result = predict(model=NORMAL_MODEL, image_path=filepath)
+        return jsonify({'result': result}), 200
     return jsonify({'msg': 'File not allowed'}), 400
 
 
