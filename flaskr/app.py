@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 from flask import Flask, flash, jsonify, redirect, render_template, request, send_from_directory, url_for
 from werkzeug.utils import secure_filename
-
+from pymongo import MongoClient
 from tensorflow.keras.models import load_model
 
 from utils.model_prediction import convert_image, predict
@@ -12,7 +12,9 @@ load_dotenv(dotenv_path='.env')
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 UPLOAD_FOLDER = os.getenv('UPLOAD_FOLDER')
+MONGODB_URI = os.getenv('MONGODB_URI')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+NORMAL_MODEL = load_model('saved_models/trained_cnn1')
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -20,7 +22,8 @@ app.secret_key = SECRET_KEY
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
-NORMAL_MODEL = load_model('saved_models/trained_cnn1')
+client = MongoClient(MONGODB_URI)
+collection = client['nlp']['monkeys']
 
 
 def allowed_file(filename):
@@ -32,7 +35,21 @@ def home():
     return render_template('index.html')
 
 
-@app.route('/search-image', methods=['GET', 'POST'])
+@app.route('/search-text', methods=['POST'])
+def search_text():
+    data = request.get_json()
+    text = data['text']
+    query = {
+        '$or': [
+            {'latin_name': f'/.*{text}.*/i'},
+            {'common_name': f'/.*{text}.*/i'}
+        ]
+    }
+    result = collection.find(query)
+    return jsonify(list(result))
+
+
+@app.route('/search-image', methods=['POST'])
 def search_image():
     if 'file' not in request.files:
         return jsonify({'msg': 'No file input'}), 400
