@@ -22,6 +22,7 @@ setup(
         'flask',
         'pymongo',
         'python-dotenv',
-        'opencv-python'
+        'opencv-python',
+        'imutils'
     ],
 )
