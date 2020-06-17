@@ -24,4 +24,5 @@
         ```
     3. Start new instance:
         - Run `tmux`
-        - Run `flask run`. Press `Ctrl + B`, then `D`
+        - Run `flask run`.
+        - Close terminal tab
