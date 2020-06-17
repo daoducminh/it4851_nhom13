@@ -1,4 +1,5 @@
 import os
+import re
 
 from dotenv import load_dotenv
 from flask import Flask, flash, jsonify, redirect, render_template, request, send_from_directory, url_for
@@ -15,15 +16,15 @@ UPLOAD_FOLDER = os.getenv('UPLOAD_FOLDER')
 MONGODB_URI = os.getenv('MONGODB_URI')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 NORMAL_MODEL = load_model('saved_models/trained_cnn1')
+client = MongoClient(MONGODB_URI)
+collection = client['nlp']['monkeys']
+
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = SECRET_KEY
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
-
-client = MongoClient(MONGODB_URI)
-collection = client['nlp']['monkeys']
 
 
 def allowed_file(filename):
@@ -37,16 +38,18 @@ def home():
 
 @app.route('/search-text', methods=['POST'])
 def search_text():
+    print(MONGODB_URI)
     data = request.get_json()
     text = data['text']
+    regx = re.compile(f'.*{text}.*', re.IGNORECASE)
     query = {
         '$or': [
-            {'latin_name': f'/.*{text}.*/i'},
-            {'common_name': f'/.*{text}.*/i'}
+            {'latin_name': {'$regex': regx}},
+            {'common_name': {'$regex': regx}}
         ]
     }
-    result = collection.find(query)
-    return jsonify(list(result))
+    result = list(collection.find(query, {'_id': False}))
+    return jsonify(result)
 
 
 @app.route('/search-image', methods=['POST'])
