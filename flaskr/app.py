@@ -67,8 +67,7 @@ def search_image():
         filepath = os.path.join(UPLOAD_FOLDER, filename)
         file.save(filepath)
         jpeg_image_path = convert_image(filepath)
-
-        result = predict(model=NORMAL_MODEL, image_path=filepath)
+        result = predict(model=NORMAL_MODEL, image_path=jpeg_image_path)
         return jsonify({'result': result}), 200
     return jsonify({'msg': 'File not allowed'}), 400
 
