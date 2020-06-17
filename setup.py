@@ -22,6 +22,6 @@ setup(
         'flask',
         'pymongo',
         'python-dotenv',
-        'underthesea'
+        'opencv-python'
     ],
 )
