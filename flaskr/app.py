@@ -5,6 +5,8 @@ from dotenv import load_dotenv
 from flask import Flask, flash, jsonify, redirect, render_template, request, send_from_directory, url_for
 from werkzeug.utils import secure_filename
 from pymongo import MongoClient
+from imutils import paths
+from random import shuffle
 from tensorflow.keras.models import load_model
 
 from utils.model_prediction import convert_image, predict
@@ -16,6 +18,7 @@ UPLOAD_FOLDER = os.getenv('UPLOAD_FOLDER')
 MONGODB_URI = os.getenv('MONGODB_URI')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 NORMAL_MODEL = load_model('saved_models/trained_cnn1')
+IMAGE_FOLDER_REAL_PATH = 'flaskr/static/images/monkeys/{}'
 client = MongoClient(MONGODB_URI)
 collection = client['nlp']['monkeys']
 
@@ -66,15 +69,25 @@ def search_image():
         filepath = os.path.join(UPLOAD_FOLDER, filename)
         file.save(filepath)
         jpeg_image_path = convert_image(filepath)
-        result = predict(model=NORMAL_MODEL, image_path=jpeg_image_path)
+        prediction = predict(model=NORMAL_MODEL, image_path=jpeg_image_path)
 
-        if result:
-            query = {'id': result[0]}
-            return jsonify(list(collection.find(query, {'_id': False})))
+        if prediction:
+            animal_id = prediction[0]
+            query = {'id': animal_id}
+            result = dict(list(collection.find(query, {'_id': False}))[0])
+            try:
+                image_paths = list(
+                    paths.list_images(IMAGE_FOLDER_REAL_PATH.format(animal_id)))
+                shuffle(image_paths)
+                sample_images = []
+                for image_path in image_paths:
+                    sample_images.append(image_path.replace('flaskr', ''))
+                result['sample_images'] = sample_images
+            except:
+                pass
+            return jsonify(result)
         else:
             jsonify({'error': 'No result found'})
-
-        return jsonify({'result': result})
     return jsonify({'error': 'File not allowed'})
 
 
