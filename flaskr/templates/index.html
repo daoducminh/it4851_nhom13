@@ -135,9 +135,11 @@
                         $.ajax({
                             url: '/search-text', // point to server-side controller method
                             cache: false,
-                            contentType: false,
+                            contentType: "application/json; charset=utf-8",
                             processData: false,
-                            data: "" + text_data,
+                            data: JSON.stringify({
+                                "text": text_data
+                            }),
                             type: 'post',
                             success: function (response) {
                               for(var i = 0; i < 3; i++) {
