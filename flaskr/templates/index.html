@@ -47,6 +47,7 @@
 
                                     <!-- <form id="upload-file" enctype="multipart/form-data" method="post"> -->
                                     <input type="file" class="fileUpload" name="file" id="image-input" multiple>
+                                    <img id="output_image"/>
                                     <button class="btn-search" type="button" id="upload">SEARCH</button>
                                     <!-- </form> -->
 
@@ -66,6 +67,7 @@
         </form>
 
     </div>
+    <img id="img_search" src="" alt="" style="max-width: 180px; display: block;" class="mx-auto">
     <div class="container section-result">
         <h1 class="result">Result</h1>
         <div class="row">
@@ -76,21 +78,15 @@
     <script src="/static/js/extension/choices.js"></script>
     <script>
         $(function () {
-            $('#textInput').click(function () {
-                $.ajax({
-                    url: '/signUp',
-                    data: $('form').serialize(),
-                    type: 'POST',
-                    success: function (response) {
-                        // var noti = document.createElement
-                        // var noti = $('.notify').html(JSON.parse(response).html);
-                        $('form').append(JSON.parse(response).html);
-                        console.log(JSON.parse(response).html);
-                    },
-                    error: function (error) {
-                        console.log(error.html);
-                    }
-                });
+            $("#image-input").change(function(e) {
+                var reader = new FileReader();
+                reader.onload = function() {
+                  var output1 = document.getElementById('output_image');
+                  var output2 = document.getElementById('img_search');
+                  output1.src = reader.result;
+                  output2.src = reader.result;
+                }
+                reader.readAsDataURL(event.target.files[0]);
             });
 
             $("#search").change(function () {
@@ -105,6 +101,7 @@
                 var form_data = new FormData();
                 form_data.append('file', file_data);
                 $('#exampleModal').modal('hide');
+                $('.section-result .row').empty();
                 $.ajax({
                     url: '/search-image', // point to server-side controller method
                     cache: false,
@@ -127,7 +124,36 @@
                     }
                 });
             });
-
+            $('#textInput').on('click', function () {
+                        var text_data = $('#search').val();
+                        if (text_data == "") {
+                          return false;
+                        }
+                        $('.section-result .row').empty();
+                        var outputImage = document.getElementById('img_search');
+                        outputImage.src = "";
+                        $.ajax({
+                            url: '/search-text', // point to server-side controller method
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            data: text_data,
+                            type: 'post',
+                            success: function (response) {
+                              for(var i = 0; i < 3; i++) {
+                                    $('.section-result .row').append('<div class="col-sm-4">' + '<div class="card">' + ' <img class="card-img-top" src= ' + response.sample_images[i] + ' alt="Card image cap">'
+                                     + '<div class="card-body">' + 
+                                     '<h5 class="card-title">' + response.common_name + ' </h5>' + 
+                                     '<p class="card-text">' + response.description + '</p>' + 
+                                     ' </div> </div> </div>'
+                              )}
+                              $('.section-result').css('display', 'block');
+                            },
+                            error: function (response) {
+                                $('.section-result .row').html(response); // display error response from the server
+                            }
+                        });
+                    });
         });
     </script>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
