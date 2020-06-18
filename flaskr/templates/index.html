@@ -7,7 +7,7 @@
     <meta name="author" content="colorlib.com">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
-    <link rel="stylesheet" href="/static/css/styles.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -66,41 +66,11 @@
         </form>
 
     </div>
-    <div class="container">
+    <div class="container section-result">
         <h1 class="result">Result</h1>
-        <p id="msg"></p>
         <div class="row">
-
-            <div class="col-sm-4">
-                <div class="card">
-                    <img class="card-img-top" src="/static/images/imagese.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">TEN </h5>
-                        <p class="card-text">THONG TIN</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="card">
-                    <img class="card-img-top" src="/static/images/imagese.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">TEN </h5>
-                        <p class="card-text">THONG TIN</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="card">
-                    <img class="card-img-top" src="/static/images/imagese.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">TEN </h5>
-                        <p class="card-text">THONG TIN</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
+            
+            
         </div>
     </div>
     <script src="/static/js/extension/choices.js"></script>
@@ -134,6 +104,7 @@
                 var file_data = $('#image-input').prop('files')[0];
                 var form_data = new FormData();
                 form_data.append('file', file_data);
+                $('#exampleModal').modal('hide');
                 $.ajax({
                     url: '/search-image', // point to server-side controller method
                     cache: false,
@@ -142,22 +113,23 @@
                     data: form_data,
                     type: 'post',
                     success: function (response) {
-                        $('.card-title').html(response.result[0]); // display success response from the server
+                        for(var i = 0; i < 3; i++) {
+                        $('.section-result .row').append('<div class="col-sm-4">' + '<div class="card">' + ' <img class="card-img-top" src= ' + response.sample_images[i] + ' alt="Card image cap">'
+                         + '<div class="card-body">' + 
+                        '<h5 class="card-title">' + response.common_name + ' </h5>' + 
+                        '<p class="card-text">' + response.description + '</p>' + 
+                   ' </div> </div> </div>'
+                        )}
+                        $('.section-result').css('display', 'block');
                     },
                     error: function (response) {
-                        $('#msg').html(response); // display error response from the server
+                        $('.section-result .row').html(response); // display error response from the server
                     }
                 });
             });
 
         });
     </script>
-    <!-- <script>
-      $(".searchText .uploadImage").click(function() {
-        $(".searchText").css('display', 'none');
-        $(".searchImage").css('display', 'block');
-      });
-    </script> -->
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 
 </html>
