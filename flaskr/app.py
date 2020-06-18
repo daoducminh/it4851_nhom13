@@ -20,7 +20,7 @@ client = MongoClient(MONGODB_URI)
 collection = client['nlp']['monkeys']
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = SECRET_KEY
 app.config['SESSION_TYPE'] = 'filesystem'
@@ -55,21 +55,27 @@ def search_text():
 @app.route('/search-image', methods=['POST'])
 def search_image():
     if 'file' not in request.files:
-        return jsonify({'msg': 'No file input'}), 400
+        return jsonify({'error': 'No file input'})
     file = request.files['file']
     # if user does not select file, browser also
     # submit an empty part without filename
     if file.filename == '':
-        return jsonify({'msg': 'No selected file'}), 400
+        return jsonify({'error': 'No selected file'})
     if file and allowed_file(file.filename):
-        print(file.filename)
         filename = secure_filename(file.filename)
         filepath = os.path.join(UPLOAD_FOLDER, filename)
         file.save(filepath)
         jpeg_image_path = convert_image(filepath)
         result = predict(model=NORMAL_MODEL, image_path=jpeg_image_path)
-        return jsonify({'result': result}), 200
-    return jsonify({'msg': 'File not allowed'}), 400
+
+        if result:
+            query = {'id': result[0]}
+            return jsonify(list(collection.find(query, {'_id': False})))
+        else:
+            jsonify({'error': 'No result found'})
+
+        return jsonify({'result': result})
+    return jsonify({'error': 'File not allowed'})
 
 
 @app.route('/favicon.ico')

@@ -7,7 +7,7 @@
     <meta name="author" content="colorlib.com">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css') }}" type="text/css">
+    <link rel="stylesheet" href="/static/css/styles.css" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -73,8 +73,7 @@
 
             <div class="col-sm-4">
                 <div class="card">
-                    <img class="card-img-top" src="{{ url_for('static',filename='images/imagese.jpg') }}"
-                        alt="Card image cap">
+                    <img class="card-img-top" src="/static/images/imagese.jpg" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">TEN </h5>
                         <p class="card-text">THONG TIN</p>
@@ -84,8 +83,7 @@
             </div>
             <div class="col-sm-4">
                 <div class="card">
-                    <img class="card-img-top" src="{{ url_for('static',filename='images/imagese.jpg') }}"
-                        alt="Card image cap">
+                    <img class="card-img-top" src="/static/images/imagese.jpg" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">TEN </h5>
                         <p class="card-text">THONG TIN</p>
@@ -95,8 +93,7 @@
             </div>
             <div class="col-sm-4">
                 <div class="card">
-                    <img class="card-img-top" src="{{ url_for('static',filename='images/imagese.jpg') }}"
-                        alt="Card image cap">
+                    <img class="card-img-top" src="/static/images/imagese.jpg" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">TEN </h5>
                         <p class="card-text">THONG TIN</p>
@@ -106,7 +103,7 @@
             </div>
         </div>
     </div>
-    <script src="{{ url_for('static',filename='js/extension/choices.js') }}"></script>
+    <script src="/static/js/extension/choices.js"></script>
     <script>
         $(function () {
             $('#textInput').click(function () {
