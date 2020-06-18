@@ -1005,3 +1005,6 @@ html {
   .modal-footer button {
     padding: 10px 0;
   }
+  .section-result {
+    display: none;
+  }
