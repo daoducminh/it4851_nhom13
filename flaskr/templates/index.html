@@ -137,7 +137,9 @@
                             cache: false,
                             contentType: false,
                             processData: false,
-                            data: text_data,
+                            data: { 
+                                text: text_data
+                            },
                             type: 'post',
                             success: function (response) {
                               for(var i = 0; i < 3; i++) {
