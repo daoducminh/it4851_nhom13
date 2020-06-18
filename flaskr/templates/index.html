@@ -142,13 +142,11 @@
                             }),
                             type: 'post',
                             success: function (response) {
-                              for(var i = 0; i < 3; i++) {
-                                    $('.section-result .row').append('<div class="col-sm-4">' + '<div class="card">' + ' <img class="card-img-top" src= ' + response.sample_images[i] + ' alt="Card image cap">'
+                                    $('.section-result .row').append('<div class="col-sm-6 mx-auto">' + '<div class="card">' + ' <img class="card-img-top" src= ' + response[0].image + ' alt="Card image cap">'
                                      + '<div class="card-body">' + 
-                                     '<h5 class="card-title">' + response.common_name + ' </h5>' + 
-                                     '<p class="card-text">' + response.description + '</p>' + 
+                                     '<h5 class="card-title">' + response[0].common_name + ' </h5>' + 
+                                     '<p class="card-text">' + response[0].description + '</p>' + 
                                      ' </div> </div> </div>'
-                              )}
                               $('.section-result').css('display', 'block');
                             },
                             error: function (response) {
