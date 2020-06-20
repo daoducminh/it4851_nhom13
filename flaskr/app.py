@@ -41,8 +41,8 @@ def home():
 
 @app.route('/search-text', methods=['POST'])
 def search_text():
-    print(MONGODB_URI)
     data = request.get_json()
+    print(data)
     text = data['text']
     regx = re.compile(f'.*{text}.*', re.IGNORECASE)
     query = {
