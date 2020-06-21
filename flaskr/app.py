@@ -17,7 +17,9 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 UPLOAD_FOLDER = os.getenv('UPLOAD_FOLDER')
 MONGODB_URI = os.getenv('MONGODB_URI')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
-NORMAL_MODEL = load_model('saved_models/trained_cnn1')
+TRAINED_MODEL_PATH = os.getenv('TRAINED_MODEL_PATH')
+
+NORMAL_MODEL = load_model(TRAINED_MODEL_PATH)
 IMAGE_FOLDER_REAL_PATH = 'flaskr/static/images/monkeys/{}'
 client = MongoClient(MONGODB_URI)
 collection = client['nlp']['monkeys']
