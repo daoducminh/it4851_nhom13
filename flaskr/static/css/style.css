@@ -1023,7 +1023,8 @@ h3.name_monkey {
   font-size: 40px;
 }
 .col-sm-6.description {
-font-size: 20px;
+font-size: 17px;
+font-weight: 500;
 line-height: 2.5;
 }
 
@@ -1048,4 +1049,9 @@ margin-top: 50px;
 .back {
   position: absolute;
   right: 0;
+}
+
+.img-thumbnail {
+    width: 262.5px;
+    height: 300px;
 }
