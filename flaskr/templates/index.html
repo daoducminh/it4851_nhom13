@@ -148,12 +148,12 @@
                     type: 'post',
                     success: function (response) {
                         $('.name_monkey').html(response.common_name);
-                        $('.section-result .description').html(response.description);
+                        $('.description').html(response.description);
                         $('.height').html(response.height_length);
                         $('.weight').html(response.weight);
                         $('#img_top').attr('src', response.image);
                         for(var i = 0; i < 16; i++) {
-                        $('.section-result .image_result').append('<div class="col-lg-3 col-md-4 col-6"><a href="#" class="d-block mb-4 h-100"><img class="img-fluid img-thumbnail" src= ' + response.sample_images[i] + ' alt=""></a></div>' 
+                        $('.image_result').append('<div class="col-lg-3 col-md-4 col-6"><a href="#" class="d-block mb-4 h-100"><img class="img-fluid img-thumbnail" src= ' + response.sample_images[i] + ' alt=""></a></div>' 
                         )}
                         $('.section-result').css('display', 'block');
                     },
