@@ -67,14 +67,50 @@
         </form>
 
     </div>
-    <img id="img_search" src="" alt="" style="max-width: 180px; display: block;" class="mx-auto">
     <div class="container section-result">
-        <h1 class="result">Result</h1>
-        <div class="row">
-            
-            
+      <h3 class="name_monkey"></h3>
+      <div class="row">
+        <div class="col-sm-6 description">
+      
         </div>
+        <div class="col-sm-6">
+          <div class="card">
+            <img class="card-img" id="img_top" src="" alt="Card image cap" style="width: 100%;height: 400px;">
+            <div class="card-body">
+               <div class="row">
+                 <div class="col-sm-6">
+                    <h2 class="text-center">Kich thuoc</h2>
+                    <h5 class="card-title height"></h5>
+                 </div>
+                 <div class="col-sm-6">
+                  <h2 class="text-center">Can nang</h2>
+                  <h5 class="card-text weight"></h5>
+                 </div>
+               </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <h1 class="result">Result</h1> -->
+      <div class="row">
+        <div class="row text-center text-lg-left image_result">
+        </div>
+        <!-- <div class="col-sm-6 offset-3">
+          <div class="card">
+            <img class="card-img-top" src="">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text"></p>
+              <a href="#" class="btn btn-primary">Go some where</a>
+            </div>
+          </div>
+        </div> -->
+        
+      </div>
     </div>
+<div class="back">
+    <a href=""><i class="fa fa-arrow-up"></i>  </a></div>
     <script src="/static/js/extension/choices.js"></script>
     <script>
         $(function () {
@@ -102,6 +138,7 @@
                 form_data.append('file', file_data);
                 $('#exampleModal').modal('hide');
                 $('.section-result .row').empty();
+                $('.section-result .image_result').empty();
                 $.ajax({
                     url: '/search-image', // point to server-side controller method
                     cache: false,
@@ -110,12 +147,13 @@
                     data: form_data,
                     type: 'post',
                     success: function (response) {
-                        for(var i = 0; i < 3; i++) {
-                        $('.section-result .row').append('<div class="col-sm-4">' + '<div class="card">' + ' <img class="card-img-top" src= ' + response.sample_images[i] + ' alt="Card image cap">'
-                         + '<div class="card-body">' + 
-                        '<h5 class="card-title">' + response.common_name + ' </h5>' + 
-                        '<p class="card-text">' + response.description + '</p>' + 
-                   ' </div> </div> </div>'
+                        $('.name_monkey').html(response.common_name);
+                        $('.section-result .description').html(response.description);
+                        $('.height').html(response.height_length);
+                        $('.weight').html(response.weight);
+                        $('#img_top').attr('src', response.image);
+                        for(var i = 0; i < 16; i++) {
+                        $('.section-result .image_result').append('<div class="col-lg-3 col-md-4 col-6"><a href="#" class="d-block mb-4 h-100"><img class="img-fluid img-thumbnail" src= ' + response.sample_images[i] + ' alt=""></a></div>' 
                         )}
                         $('.section-result').css('display', 'block');
                     },
@@ -142,11 +180,11 @@
                             }),
                             type: 'post',
                             success: function (response) {
-                                    $('.section-result .row').append('<div class="col-sm-6 mx-auto">' + '<div class="card">' + ' <img class="card-img-top" src= ' + response[0].image + ' alt="Card image cap">'
-                                     + '<div class="card-body">' + 
-                                     '<h5 class="card-title">' + response[0].common_name + ' </h5>' + 
-                                     '<p class="card-text">' + response[0].description + '</p>' + 
-                                     ' </div> </div> </div>')
+                                    $('.name_monkey').html(response.common_name);
+                        $('.section-result .description').html(response.description);
+                        $('.height').html(response.height_length);
+                        $('.weight').html(response.weight);
+                        $('#img_top').attr('src', response.image);
                               $('.section-result').css('display', 'block');
                             },
                             error: function (response) {
