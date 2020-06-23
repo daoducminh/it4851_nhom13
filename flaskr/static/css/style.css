@@ -1016,3 +1016,36 @@ img#output_image {
     display: block;
     margin-bottom: 30px;
   }
+
+h3.name_monkey {
+  text-align: center;
+  padding: 20px;
+  font-size: 40px;
+}
+.col-sm-6.description {
+font-size: 20px;
+line-height: 2.5;
+}
+
+.row.image_result {
+margin-top: 50px;
+}
+
+.section-result .card-title, .card-text {
+  padding: 15px;
+  border-radius: 10px;
+  background: #b9b9b9;
+}
+
+.back a {
+  color: white;
+  padding: 10px 13px;
+  background: black;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.back {
+  position: absolute;
+  right: 0;
+}
