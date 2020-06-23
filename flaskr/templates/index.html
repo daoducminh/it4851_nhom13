@@ -186,6 +186,13 @@
                         }
                         var outputImage = document.getElementById('img_top');
                         outputImage.src = "";
+                      $('html, body').animate({
+        scrollTop: 550
+      }, 800
+   
+        // Add hash (#) to URL when done scrolling (default click behavior)
+    
+      );
                         $.ajax({
                             url: '/search-text', // point to server-side controller method
                             cache: false,
