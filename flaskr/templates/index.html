@@ -114,6 +114,16 @@
     <script src="/static/js/extension/choices.js"></script>
     <script>
         $(function () {
+            $('#back').click(function(event) {
+  event.preventDefault();
+  $('html, body').animate({
+        scrollTop: 0
+      }, 800
+   
+        // Add hash (#) to URL when done scrolling (default click behavior)
+    
+      );
+});
             $("#image-input").change(function(e) {
                 var reader = new FileReader();
                 reader.onload = function() {
@@ -138,6 +148,13 @@
                 form_data.append('file', file_data);
                 $('#exampleModal').modal('hide');
                 $('.section-result .image_result').empty();
+                 $('html, body').animate({
+        scrollTop: 550
+      }, 800
+   
+        // Add hash (#) to URL when done scrolling (default click behavior)
+    
+      );
                 $.ajax({
                     url: '/search-image', // point to server-side controller method
                     cache: false,
@@ -155,6 +172,7 @@
                         $('.image_result').append('<div class="col-lg-3 col-md-4 col-6"><a href="#" class="d-block mb-4 h-100"><img class="img-fluid img-thumbnail" src= ' + response.sample_images[i] + ' alt=""></a></div>' 
                         )}
                         $('.section-result').css('display', 'block');
+                        
                     },
                     error: function (response) {
                         $('.section-result .row').html(response); // display error response from the server
