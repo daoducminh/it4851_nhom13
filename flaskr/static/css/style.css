@@ -1054,5 +1054,5 @@ margin-top: 50px;
 .img-thumbnail {
     width: 262.5px;
     height: 300px !important;
-    border-radius: 50%;
+    border-radius: 50% !important;
 }
