@@ -196,11 +196,11 @@
                             }),
                             type: 'post',
                             success: function (response) {
-                                    $('.name_monkey').html(response.common_name);
-                        $('.section-result .description').html(response.description);
-                        $('.height').html(response.height_length);
-                        $('.weight').html(response.weight);
-                        $('#img_top').attr('src', response.image);
+                                    $('.name_monkey').html(response[0].common_name);
+                        $('.section-result .description').html(response[0].description);
+                        $('.height').html(response[0].height_length);
+                        $('.weight').html(response[0].weight);
+                        $('#img_top').attr('src', response[0].image);
                               $('.section-result').css('display', 'block');
                             },
                             error: function (response) {
