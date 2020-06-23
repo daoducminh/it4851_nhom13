@@ -137,7 +137,6 @@
                 var form_data = new FormData();
                 form_data.append('file', file_data);
                 $('#exampleModal').modal('hide');
-                $('.section-result .row').empty();
                 $('.section-result .image_result').empty();
                 $.ajax({
                     url: '/search-image', // point to server-side controller method
@@ -167,7 +166,6 @@
                         if (text_data == "") {
                           return false;
                         }
-                        $('.section-result .row').empty();
                         var outputImage = document.getElementById('img_search');
                         outputImage.src = "";
                         $.ajax({
