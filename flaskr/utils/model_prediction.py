@@ -42,9 +42,9 @@ def predict(model, image_path):
     data = [image]
     data = np.array(data, dtype='float') / 255.0
     predictions = model.predict(x=data)
-    a = (predictions > 0.8).astype(int)
+    a = (predictions > 0.5).astype(int)
     print(a)
     if 1 in a[0]:
-        return list(lb.inverse_transform((predictions > 0.5).astype(int)))
+        return list(lb.inverse_transform(a))
     else:
         return []
