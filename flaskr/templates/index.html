@@ -177,6 +177,7 @@
           },
           error: function (response) {
             $('.section-result .row').html(response); // display error response from the server
+            alert(response.error)
           }
         });
       });
@@ -209,6 +210,7 @@
           },
           error: function (response) {
             $('.section-result .row').html(response); // display error response from the server
+            alert(response.error)
           }
         });
       });
