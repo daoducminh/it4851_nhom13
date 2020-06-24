@@ -89,7 +89,7 @@ def search_image():
                 pass
             return jsonify(result)
         else:
-            jsonify({'error': 'No result found'})
+            return jsonify({'error': 'No result found'})
     return jsonify({'error': 'File not allowed'})
 
 
