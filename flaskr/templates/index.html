@@ -163,17 +163,20 @@
           data: form_data,
           type: 'post',
           success: function (response) {
-            $('.name_monkey').html(response.common_name);
-            $('.description').html(response.description);
-            $('.height').html(response.height_length);
-            $('.weight').html(response.weight);
-            $('#img_top').attr('src', response.image);
-            for (var i = 0; i < 16; i++) {
-              $('.image_result').append('<div class="col-lg-3 col-md-4 col-6"><a href="#" class="d-block mb-4 h-100"><img class="img-fluid img-thumbnail" src= ' + response.sample_images[i] + ' alt=""></a></div>'
-              )
+            if (response.error) {
+              alert(response.error)
+            } else {
+              $('.name_monkey').html(response.common_name);
+              $('.description').html(response.description);
+              $('.height').html(response.height_length);
+              $('.weight').html(response.weight);
+              $('#img_top').attr('src', response.image);
+              for (var i = 0; i < 16; i++) {
+                $('.image_result').append('<div class="col-lg-3 col-md-4 col-6"><a href="#" class="d-block mb-4 h-100"><img class="img-fluid img-thumbnail" src= ' + response.sample_images[i] + ' alt=""></a></div>'
+                )
+              }
+              $('.section-result').css('display', 'block');
             }
-            $('.section-result').css('display', 'block');
-
           },
           error: function (response) {
             $('.section-result .row').html(response); // display error response from the server
@@ -201,12 +204,16 @@
           }),
           type: 'post',
           success: function (response) {
-            $('.name_monkey').html(response[0].common_name);
-            $('.section-result .description').html(response[0].description);
-            $('.height').html(response[0].height_length);
-            $('.weight').html(response[0].weight);
-            $('#img_top').attr('src', response[0].image);
-            $('.section-result').css('display', 'block');
+            if (response.error) {
+              alert(response.error)
+            } else {
+              $('.name_monkey').html(response[0].common_name);
+              $('.section-result .description').html(response[0].description);
+              $('.height').html(response[0].height_length);
+              $('.weight').html(response[0].weight);
+              $('#img_top').attr('src', response[0].image);
+              $('.section-result').css('display', 'block');
+            }
           },
           error: function (response) {
             $('.section-result .row').html(response); // display error response from the server
