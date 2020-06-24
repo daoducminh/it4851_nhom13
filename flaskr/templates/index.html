@@ -1,102 +1,102 @@
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="author" content="colorlib.com">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
-    <link rel="stylesheet" href="/static/css/style.css" type="text/css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="author" content="colorlib.com">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
-    <title>Tìm kiếm động vật</title>
+  <title>Tìm kiếm động vật</title>
 </head>
 
 <body>
-    <div class="s130">
-        <form class="searchText">
-            <div class="inner-form">
-                <div class="input-field first-wrap">
-                    <div class="svg-wrapper">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                            <path
-                                d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
-                            </path>
-                        </svg>
-                    </div>
-                    <input id="search" type="text" name="textSearch" placeholder="What are you looking for?" />
+  <div class="s130">
+    <form class="searchText">
+      <div class="inner-form">
+        <div class="input-field first-wrap">
+          <div class="svg-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path
+                d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+              </path>
+            </svg>
+          </div>
+          <input id="search" type="text" name="textSearch" placeholder="What are you looking for?" />
+        </div>
+        <div class="input-field second-wrap">
+          <button class="uploadImage" type="button" data-toggle="modal" data-target="#exampleModal"><i
+              class="fa fa-camera"></i></button>
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Search by image</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
                 </div>
-                <div class="input-field second-wrap">
-                    <button class="uploadImage" type="button" data-toggle="modal" data-target="#exampleModal"><i
-                            class="fa fa-camera"></i></button>
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Search by image</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
+                <div class="modal-body">
 
-                                    <!-- <form id="upload-file" enctype="multipart/form-data" method="post"> -->
-                                    <input type="file" class="fileUpload" name="file" id="image-input" multiple>
-                                    <img id="output_image"/>
-                                    <button class="btn-search" type="button" id="upload">SEARCH</button>
-                                    <!-- </form> -->
+                  <!-- <form id="upload-file" enctype="multipart/form-data" method="post"> -->
+                  <input type="file" class="fileUpload" name="file" id="image-input" multiple>
+                  <img id="output_image" />
+                  <button class="btn-search" type="button" id="upload">SEARCH</button>
+                  <!-- </form> -->
 
-                                </div>
-                                <!-- <div class="modal-footer">
+                </div>
+                <!-- <div class="modal-footer">
                     
                   </div> -->
 
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn-search" type="button" id="textInput">SEARCH</button>
-                </div>
+              </div>
             </div>
-            <!-- <span class="info">ex. Game, Music, Video, Photography</span> -->
-
-        </form>
-
-    </div>
-    <div class="container section-result">
-      <h3 class="name_monkey"></h3>
-      <div class="row">
-        <div class="col-sm-6 description">
-      
+          </div>
+          <button class="btn-search" type="button" id="textInput">SEARCH</button>
         </div>
-        <div class="col-sm-6">
-          <div class="card">
-            <img class="card-img" id="img_top" src="" alt="Card image cap" style="width: 100%;height: 400px;">
-            <div class="card-body">
-               <div class="row">
-                 <div class="col-sm-6">
-                    <h2 class="text-center">Kích thước</h2>
-                    <h5 class="card-title height"></h5>
-                 </div>
-                 <div class="col-sm-6">
-                  <h2 class="text-center">Cân nặng</h2>
-                  <h5 class="card-text weight"></h5>
-                 </div>
-               </div>
+      </div>
+      <!-- <span class="info">ex. Game, Music, Video, Photography</span> -->
 
+    </form>
+
+  </div>
+  <div class="container section-result">
+    <h3 class="name_monkey"></h3>
+    <div class="row">
+      <div class="col-sm-6 description">
+
+      </div>
+      <div class="col-sm-6">
+        <div class="card">
+          <img class="card-img" id="img_top" src="" alt="Card image cap" style="width: 100%;height: 400px;">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-6">
+                <h2 class="text-center">Kích thước</h2>
+                <h5 class="card-title height"></h5>
+              </div>
+              <div class="col-sm-6">
+                <h2 class="text-center">Cân nặng</h2>
+                <h5 class="card-text weight"></h5>
+              </div>
             </div>
+
           </div>
         </div>
       </div>
-      <!-- <h1 class="result">Result</h1> -->
-      <div class="row">
-        <div class="row text-center text-lg-left image_result">
-        </div>
-        <!-- <div class="col-sm-6 offset-3">
+    </div>
+    <!-- <h1 class="result">Result</h1> -->
+    <div class="row">
+      <div class="row text-center text-lg-left image_result">
+      </div>
+      <!-- <div class="col-sm-6 offset-3">
           <div class="card">
             <img class="card-img-top" src="">
             <div class="card-body">
@@ -106,117 +106,114 @@
             </div>
           </div>
         </div> -->
-        
-      </div>
+
     </div>
-<div class="back">
-    <a href=""><i class="fa fa-arrow-up"></i>  </a></div>
-    <script src="/static/js/extension/choices.js"></script>
-    <script>
-        $(function () {
-            $('.back').click(function(event) {
-  event.preventDefault();
-  $('html, body').animate({
-        scrollTop: 0
-      }, 800
-   
-        // Add hash (#) to URL when done scrolling (default click behavior)
-    
-      );
-});
-            $("#image-input").change(function(e) {
-                var reader = new FileReader();
-                reader.onload = function() {
-                  var output1 = document.getElementById('output_image');
-                  var output2 = document.getElementById('img_top');
-                  output1.src = reader.result;
-                  output2.src = reader.result;
-                }
-                reader.readAsDataURL(event.target.files[0]);
-            });
+  </div>
+  <div class="back">
+    <a href=""><i class="fa fa-arrow-up"></i> </a></div>
+  <script src="/static/js/extension/choices.js"></script>
+  <script>
+    $(function () {
+      $('.back').click(function (event) {
+        event.preventDefault();
+        $('html, body').animate({
+          scrollTop: 0
+        }, 800
 
-            $("#search").change(function () {
-                var lastSpan = $('form span').last();
-                if (lastSpan) {
-                    lastSpan.remove();
-                }
-            });
+          // Add hash (#) to URL when done scrolling (default click behavior)
 
-            $('#upload').on('click', function () {
-                var file_data = $('#image-input').prop('files')[0];
-                var form_data = new FormData();
-                form_data.append('file', file_data);
-                $('#exampleModal').modal('hide');
-                $('.section-result .image_result').empty();
-                 $('html, body').animate({
-        scrollTop: 550
-      }, 800
-   
-        // Add hash (#) to URL when done scrolling (default click behavior)
-    
-      );
-                $.ajax({
-                    url: '/search-image', // point to server-side controller method
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    data: form_data,
-                    type: 'post',
-                    success: function (response) {
-                        $('.name_monkey').html(response.common_name);
-                        $('.description').html(response.description);
-                        $('.height').html(response.height_length);
-                        $('.weight').html(response.weight);
-                        $('#img_top').attr('src', response.image);
-                        for(var i = 0; i < 16; i++) {
-                        $('.image_result').append('<div class="col-lg-3 col-md-4 col-6"><a href="#" class="d-block mb-4 h-100"><img class="img-fluid img-thumbnail" src= ' + response.sample_images[i] + ' alt=""></a></div>' 
-                        )}
-                        $('.section-result').css('display', 'block');
-                        
-                    },
-                    error: function (response) {
-                        $('.section-result .row').html(response); // display error response from the server
-                    }
-                });
-            });
-            $('#textInput').on('click', function () {
-                        var text_data = $('#search').val();
-                        if (text_data == "") {
-                          return false;
-                        }
-                        var outputImage = document.getElementById('img_top');
-                        outputImage.src = "";
-                      $('html, body').animate({
-        scrollTop: 550
-      }, 800
-   
-        // Add hash (#) to URL when done scrolling (default click behavior)
-    
-      );
-                        $.ajax({
-                            url: '/search-text', // point to server-side controller method
-                            cache: false,
-                            contentType: "application/json; charset=utf-8",
-                            processData: false,
-                            data: JSON.stringify({
-                                "text": text_data
-                            }),
-                            type: 'post',
-                            success: function (response) {
-                                    $('.name_monkey').html(response[0].common_name);
-                        $('.section-result .description').html(response[0].description);
-                        $('.height').html(response[0].height_length);
-                        $('.weight').html(response[0].weight);
-                        $('#img_top').attr('src', response[0].image);
-                              $('.section-result').css('display', 'block');
-                            },
-                            error: function (response) {
-                                $('.section-result .row').html(response); // display error response from the server
-                            }
-                        });
-                    });
+        );
+      });
+      $("#image-input").change(function (e) {
+        var reader = new FileReader();
+        reader.onload = function () {
+          var output1 = document.getElementById('output_image');
+          var output2 = document.getElementById('img_top');
+          output1.src = reader.result;
+          output2.src = reader.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
+      });
+
+      $("#search").change(function () {
+        var lastSpan = $('form span').last();
+        if (lastSpan) {
+          lastSpan.remove();
+        }
+      });
+
+      $('#upload').on('click', function () {
+        var file_data = $('#image-input').prop('files')[0];
+        var form_data = new FormData();
+        form_data.append('file', file_data);
+        $('#exampleModal').modal('hide');
+        $('.section-result .image_result').empty();
+        $('html, body').animate({
+          scrollTop: 550
+        }, 800
+
+          // Add hash (#) to URL when done scrolling (default click behavior)
+
+        );
+        $.ajax({
+          url: '/search-image', // point to server-side controller method
+          cache: false,
+          contentType: false,
+          processData: false,
+          data: form_data,
+          type: 'post',
+          success: function (response) {
+            $('.name_monkey').html(response.common_name);
+            $('.description').html(response.description);
+            $('.height').html(response.height_length);
+            $('.weight').html(response.weight);
+            $('#img_top').attr('src', response.image);
+            for (var i = 0; i < 16; i++) {
+              $('.image_result').append('<div class="col-lg-3 col-md-4 col-6"><a href="#" class="d-block mb-4 h-100"><img class="img-fluid img-thumbnail" src= ' + response.sample_images[i] + ' alt=""></a></div>'
+              )
+            }
+            $('.section-result').css('display', 'block');
+
+          },
+          error: function (response) {
+            $('.section-result .row').html(response); // display error response from the server
+          }
         });
-    </script>
+      });
+      $('#textInput').on('click', function () {
+        var text_data = $('#search').val();
+        if (text_data == "") {
+          return false;
+        }
+        var outputImage = document.getElementById('img_top');
+        outputImage.src = "";
+        $('html, body').animate({
+          scrollTop: 550
+        }, 800);
+        $.ajax({
+          url: '/search-text', // point to server-side controller method
+          cache: false,
+          contentType: "application/json; charset=utf-8",
+          processData: false,
+          data: JSON.stringify({
+            "text": text_data
+          }),
+          type: 'post',
+          success: function (response) {
+            $('.name_monkey').html(response[0].common_name);
+            $('.section-result .description').html(response[0].description);
+            $('.height').html(response[0].height_length);
+            $('.weight').html(response[0].weight);
+            $('#img_top').attr('src', response[0].image);
+            $('.section-result').css('display', 'block');
+          },
+          error: function (response) {
+            $('.section-result .row').html(response); // display error response from the server
+          }
+        });
+      });
+    });
+  </script>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 
 </html>
