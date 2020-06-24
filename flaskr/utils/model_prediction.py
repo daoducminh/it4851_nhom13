@@ -45,6 +45,6 @@ def predict(model, image_path):
     print(predictions)
     a = (predictions > 0.8).astype(int)
     if 1 in a[0]:
-        return list(lb.inverse_transform((predictions > 0.7).astype(int)))
+        return list(lb.inverse_transform((predictions > 0.5).astype(int)))
     else:
         return []
